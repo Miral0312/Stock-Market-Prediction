@@ -1,5 +1,21 @@
-# Stock Market Prediction
+### Stock Price Prediction and Visualization 📈  
 
-#### Used Linear Regression Model by using MinMaxScaler.
+This project integrates a **Flask-based backend** with a **React frontend** to retrieve, analyze, and predict stock prices. It utilizes **Linear Regression** with **MinMaxScaler** for forecasting and offers interactive data visualization for trend analysis.  
 
-#### Will upadte the accuracy from `99.98%` also while taking company name into consideration. Also will change the model with better tuning to provide better answer with more features.
+#### Key Features:  
+✔️ **Historical Stock Data Retrieval** using the Yahoo Finance API  
+✔️ **Stock Price Prediction** using a Linear Regression model (99.98% accuracy)  
+✔️ **Interactive Charts** powered by Chart.js for trend analysis  
+✔️ **Seamless API Communication** between Flask and React  
+
+#### Future Improvements:  
+🔹 Incorporate **company name as a feature** for more accurate predictions  
+🔹 **Hyperparameter tuning** to improve model performance  
+🔹 Explore advanced models like **ARIMA, LSTMs, or ensemble techniques**  
+🔹 Enhance feature selection for better trend analysis  
+
+#### Tech Stack:  
+- **Backend:** Flask, scikit-learn, Yahoo Finance API  
+- **Frontend:** React, Chart.js, TailwindCSS  
+
+This project serves as a foundation for **financial analysis** and can be enhanced with additional features for deeper market insights. 🚀

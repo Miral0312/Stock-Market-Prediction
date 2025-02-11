@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import StockChart from "./components/StockChart.jsx"; 
+import HistoricalPriceChart from "./components/HistoricalPriceChart.jsx";
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +9,7 @@ const App = () => {
     low: "",
   });
   const [prediction, setPrediction] = useState(null);
+  const [symbol, setSymbol] = useState(""); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -24,20 +27,15 @@ const App = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      let predict = data.prediction;
-      setPrediction(predict[0 ]);
-      console.log(typeof predict[0]);
+      setPrediction(data.prediction[0]);
     } catch (error) {
       console.error("Error fetching prediction:", error);
       setPrediction("Error: Unable to fetch prediction");
     }
   };
 
-  const formatPrediction = (value) => {
-    if (typeof value === "number") {
-      return value.toFixed(2);
-    }
-    return value;
+  const handleSymbolChange = (e) => {
+    setSymbol(e.target.value);
   };
 
   return (
@@ -82,10 +80,34 @@ const App = () => {
               Predicted Closing Price:
             </p>
             <p className="text-2xl font-bold text-indigo-600">
-              {formatPrediction(prediction)}
+              {prediction.toFixed(2)}
             </p>
           </div>
         )}
+
+        {prediction !== null && (
+          <StockChart
+            open={formData.open}
+            high={formData.high}
+            low={formData.low}
+            prediction={prediction}
+          />
+        )}
+
+        <div className="mt-6">
+          <label htmlFor="symbol" className="block text-sm font-medium text-gray-700">
+            Stock Symbol
+          </label>
+          <input
+            type="text"
+            id="symbol"
+            value={symbol}
+            onChange={handleSymbolChange}
+            placeholder="Enter stock symbol (e.g., AAPL)"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          />
+          <HistoricalPriceChart symbol={symbol} /> {/* Pass symbol prop */}
+        </div>
       </div>
     </div>
   );
